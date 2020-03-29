@@ -1,13 +1,13 @@
-package com.lgh.rvadapter.base;
+package com.lgh.multi_rv_library.base;
 
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.lgh.rvadapter.holder.RViewHolder;
-import com.lgh.rvadapter.listener.ItemListener;
-import com.lgh.rvadapter.manager.RViewItemManager;
-import com.lgh.rvadapter.model.RViewItem;
+import com.lgh.multi_rv_library.holder.RViewHolder;
+import com.lgh.multi_rv_library.listener.ItemListener;
+import com.lgh.multi_rv_library.manager.RViewItemManager;
+import com.lgh.multi_rv_library.model.RViewItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +24,7 @@ public class RViewAdapter<T> extends RecyclerView.Adapter<RViewHolder> {
     private ItemListener<T> itemListener;//item点击事件监听
     private List<T> datas;//数据源
     private Context mContext;
+
 
     //单一布局
     public RViewAdapter(List<T> datas) {
@@ -87,11 +88,11 @@ public class RViewAdapter<T> extends RecyclerView.Adapter<RViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull RViewHolder holder, int position) {
-        convert(holder, datas.get(position));
+        convert(holder, datas.get(position), mContext);
     }
 
-    private void convert(RViewHolder holder, T entity) {
-        itemStyle.convert(holder, entity, holder.getAdapterPosition(), mContext);
+    private void convert(RViewHolder holder, T entity, Context context) {
+        itemStyle.convert(holder, entity, holder.getAdapterPosition(), context);
     }
 
     @Override

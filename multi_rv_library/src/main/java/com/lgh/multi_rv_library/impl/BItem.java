@@ -1,11 +1,12 @@
-package com.lgh.rvadapter.impl;
+package com.lgh.multi_rv_library.impl;
 
 import android.content.Context;
 import android.widget.TextView;
 
-import com.lgh.rvadapter.R;
-import com.lgh.rvadapter.holder.RViewHolder;
-import com.lgh.rvadapter.model.RViewItem;
+import com.lgh.multi_rv_library.R;
+import com.lgh.multi_rv_library.holder.RViewHolder;
+import com.lgh.multi_rv_library.model.RViewItem;
+
 
 public class BItem implements RViewItem<UserInfo1> {
     @Override

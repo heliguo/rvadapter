@@ -1,12 +1,13 @@
-package com.lgh.rvadapter.impl;
+package com.lgh.multi_rv_library.impl;
 
 import android.content.Context;
 import android.os.Bundle;
 
-import com.lgh.rvadapter.R;
-import com.lgh.rvadapter.RViewHelper;
-import com.lgh.rvadapter.SwipeRefreshHelper;
-import com.lgh.rvadapter.core.RViewCreate;
+
+import com.lgh.multi_rv_library.R;
+import com.lgh.multi_rv_library.RViewHelper;
+import com.lgh.multi_rv_library.SwipeRefreshHelper;
+import com.lgh.multi_rv_library.core.RViewCreate;
 
 import java.util.List;
 
@@ -54,4 +55,5 @@ public abstract class BaseAdapterActivity extends AppCompatActivity implements R
     public void notifyAdapterDataSetChanged(List datas) {
         helper.notifyAdapterDataSetChanged(datas);
     }
+
 }

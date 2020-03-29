@@ -1,9 +1,10 @@
-package com.lgh.rvadapter.manager;
+package com.lgh.multi_rv_library.manager;
+
 
 import android.content.Context;
 
-import com.lgh.rvadapter.holder.RViewHolder;
-import com.lgh.rvadapter.model.RViewItem;
+import com.lgh.multi_rv_library.holder.RViewHolder;
+import com.lgh.multi_rv_library.model.RViewItem;
 
 import androidx.collection.SparseArrayCompat;
 
@@ -12,7 +13,6 @@ import androidx.collection.SparseArrayCompat;
  * 条目管理，配合Adapter
  */
 public class RViewItemManager<T> {
-
 
     //key:int viewType value RViewItem
     private SparseArrayCompat<RViewItem<T>> styles = new SparseArrayCompat<>();
@@ -33,7 +33,7 @@ public class RViewItemManager<T> {
         for (int i = styles.size() - 1; i >= 0; i--) {
             RViewItem<T> item = styles.valueAt(i);
             //校验
-            if (item.isItemView(entity, position)){
+            if (item.isItemView(entity, position)) {
                 return styles.keyAt(i);
             }
 

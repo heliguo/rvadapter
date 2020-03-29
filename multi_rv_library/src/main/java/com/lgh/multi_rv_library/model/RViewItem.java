@@ -1,9 +1,9 @@
-package com.lgh.rvadapter.model;
+package com.lgh.multi_rv_library.model;
 
 
 import android.content.Context;
 
-import com.lgh.rvadapter.holder.RViewHolder;
+import com.lgh.multi_rv_library.holder.RViewHolder;
 
 /**
  * author:lgh on 2019-11-14 15:48
@@ -21,6 +21,6 @@ public interface RViewItem<T> {
     boolean isItemView(T entity, int position);
 
     //将item控件与数据绑定
-    void convert(RViewHolder holder, T entity, int position,Context context);
+    void convert(RViewHolder holder, T entity, int position, Context context);
 
 }
