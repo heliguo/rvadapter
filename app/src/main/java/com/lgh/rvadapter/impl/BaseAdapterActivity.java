@@ -18,7 +18,8 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 /**
  * author:lgh on 2019-11-14 11:32
  */
-public abstract class BaseAdapterActivity extends AppCompatActivity implements RViewCreate, SwipeRefreshHelper.SwipeRefreshListener {
+public abstract class BaseAdapterActivity extends AppCompatActivity implements
+        RViewCreate, SwipeRefreshHelper.SwipeRefreshListener {
 
     protected RViewHelper helper;
 
