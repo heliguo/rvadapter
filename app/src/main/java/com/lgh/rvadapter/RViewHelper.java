@@ -51,13 +51,13 @@ public class RViewHelper<T> {
     private void init() {
         RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
         if (layoutManager != null) {
-            if (layoutManager instanceof LinearLayoutManager){
+            if (layoutManager instanceof LinearLayoutManager && !(layoutManager instanceof GridLayoutManager)) {
                 Log.e("==========", "LinearLayoutManager: ");
             }
-            if (layoutManager instanceof GridLayoutManager){
+            if (layoutManager instanceof GridLayoutManager) {
                 Log.e("==========", "GridLayoutManager: ");
             }
-            if (layoutManager instanceof StaggeredGridLayoutManager){
+            if (layoutManager instanceof StaggeredGridLayoutManager) {
                 Log.e("==========", "StaggeredGridLayoutManager: ");
             }
         }

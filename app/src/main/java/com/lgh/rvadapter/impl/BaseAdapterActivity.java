@@ -1,6 +1,7 @@
 package com.lgh.rvadapter.impl;
 
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,7 +13,9 @@ import com.lgh.rvadapter.core.RViewCreate;
 
 import java.util.List;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -48,7 +51,7 @@ public abstract class BaseAdapterActivity extends AppCompatActivity implements
     @Override
     public RecyclerView createRecyclerView() {
         RecyclerView rv = findViewById(R.id.recyclerview);
-        rv.setLayoutManager(new LinearLayoutManager(this));
+        rv.setLayoutManager(new LinearLayoutManager(this ));
         return rv;
     }
 
@@ -61,6 +64,7 @@ public abstract class BaseAdapterActivity extends AppCompatActivity implements
         helper.notifyAdapterDataSetChanged(datas);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public void refresh(View view) {
         Log.e("TAG", "refresh: " );
         helper.setOrientation(RecyclerView.HORIZONTAL);
