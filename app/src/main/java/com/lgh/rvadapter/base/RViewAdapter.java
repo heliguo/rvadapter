@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.lgh.rvadapter.ItemType;
 import com.lgh.rvadapter.holder.RViewHolder;
 import com.lgh.rvadapter.listener.ItemListener;
 import com.lgh.rvadapter.manager.RViewItemManager;
@@ -18,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 /**
  * author:lgh on 2019-11-14 16:16
  */
-public class RViewAdapter<T> extends RecyclerView.Adapter<RViewHolder> {
+public class RViewAdapter<T extends ItemType> extends RecyclerView.Adapter<RViewHolder> {
 
     private RViewItemManager<T> itemStyle;//条目类型管理
     private ItemListener<T> itemListener;//item点击事件监听

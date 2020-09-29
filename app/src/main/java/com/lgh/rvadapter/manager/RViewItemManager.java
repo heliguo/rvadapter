@@ -2,6 +2,7 @@ package com.lgh.rvadapter.manager;
 
 import androidx.collection.SparseArrayCompat;
 
+import com.lgh.rvadapter.ItemType;
 import com.lgh.rvadapter.holder.RViewHolder;
 import com.lgh.rvadapter.model.RViewItem;
 
@@ -9,7 +10,7 @@ import com.lgh.rvadapter.model.RViewItem;
  * author:lgh on 2019-11-14 16:15
  * 条目管理，配合Adapter
  */
-public class RViewItemManager<T> {
+public class RViewItemManager<T extends ItemType> {
 
 
     //key:int viewType value RViewItem

@@ -1,6 +1,8 @@
 package com.lgh.rvadapter.impl;
 
-public class UserInfo1 {
+import com.lgh.rvadapter.ItemType;
+
+public class UserInfo1 implements ItemType {
 
     private String account;
     private String password;
@@ -36,8 +38,20 @@ public class UserInfo1 {
         this.type = type;
     }
 
+    @Override
+    public boolean grouping() {
+        return false;
+    }
+
     public int getType() {
         return type;
     }
 
+    public boolean isGrouping() {
+        return grouping;
+    }
+
+    public void setGrouping(boolean grouping) {
+        this.grouping = grouping;
+    }
 }

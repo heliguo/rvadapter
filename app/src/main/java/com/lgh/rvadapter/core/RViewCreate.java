@@ -3,6 +3,7 @@ package com.lgh.rvadapter.core;
 
 import android.content.Context;
 
+import com.lgh.rvadapter.ItemType;
 import com.lgh.rvadapter.base.RViewAdapter;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,7 +13,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
  * 创建ViewHelper所需的数据
  * 其实现类为ViewHelper提供数据
  */
-public interface RViewCreate<T> {
+public interface RViewCreate<T extends ItemType> {
 
     /**
      * 上下文

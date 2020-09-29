@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.paging.PagedListAdapter;
 import androidx.recyclerview.widget.DiffUtil;
 
+import com.lgh.rvadapter.ItemType;
 import com.lgh.rvadapter.holder.RViewHolder;
 import com.lgh.rvadapter.listener.ItemListener;
 import com.lgh.rvadapter.manager.RViewItemManager;
@@ -18,7 +19,7 @@ import java.util.List;
 /**
  * author:lgh on 2019-11-14 16:16
  */
-public class RViewPagedAdapter<T> extends PagedListAdapter<T, RViewHolder> {
+public class RViewPagedAdapter<T extends ItemType> extends PagedListAdapter<T, RViewHolder> {
 
     private RViewItemManager<T> itemStyle;//条目类型管理
     private ItemListener<T>     itemListener;//item点击事件监听

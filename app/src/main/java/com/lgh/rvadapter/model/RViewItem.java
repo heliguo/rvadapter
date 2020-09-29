@@ -1,15 +1,14 @@
 package com.lgh.rvadapter.model;
 
 
-import android.content.Context;
-
+import com.lgh.rvadapter.ItemType;
 import com.lgh.rvadapter.holder.RViewHolder;
 
 /**
  * author:lgh on 2019-11-14 15:48
  * javabean，记录条目,面向接口编程
  */
-public interface RViewItem<T> {
+public interface RViewItem<T extends ItemType> {
 
     //布局
     int getItemLayout();

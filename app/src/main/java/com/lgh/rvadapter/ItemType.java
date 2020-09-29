@@ -8,5 +8,7 @@ public interface ItemType {
 
     int getType();
 
+    void setType(int type);
+
     boolean grouping();
 }

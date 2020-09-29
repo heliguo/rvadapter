@@ -21,7 +21,7 @@ import java.util.List;
  * author:lgh on 2019-11-14 15:45
  * 辅助类
  */
-public class RViewHelper<T> {
+public class RViewHelper<T extends ItemType> {
 
     private Context context;
     private SwipeRefreshLayout swipeRefreshLayout;
@@ -118,7 +118,7 @@ public class RViewHelper<T> {
         recyclerView.requestLayout();
     }
 
-    public static class Builder<T> {
+    public static class Builder<T extends ItemType> {
         private RViewCreate<T> create;
         private SwipeRefreshHelper.SwipeRefreshListener listener;
 
