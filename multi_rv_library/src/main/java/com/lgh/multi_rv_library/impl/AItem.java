@@ -1,6 +1,9 @@
 package com.lgh.multi_rv_library.impl;
 
 import android.content.Context;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.lgh.multi_rv_library.R;
@@ -29,6 +32,10 @@ public class AItem implements RViewItem<UserInfo1> {
         account.setText(entity.getAccount());
         TextView password = holder.getView(R.id.single_password);
         password.setText(entity.getPassword());
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT);
+        params.topMargin = 200;
+        account.setLayoutParams(params);
     }
 }
 

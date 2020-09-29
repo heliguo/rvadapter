@@ -21,6 +21,6 @@ public interface RViewItem<T> {
     boolean isItemView(T entity, int position);
 
     //将item控件与数据绑定
-    void convert(RViewHolder holder, T entity, int position,Context context);
+    void convert(RViewHolder holder, T entity, int position);
 
 }

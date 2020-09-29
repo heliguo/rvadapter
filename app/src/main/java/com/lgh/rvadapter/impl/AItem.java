@@ -1,6 +1,7 @@
 package com.lgh.rvadapter.impl;
 
-import android.content.Context;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.lgh.rvadapter.R;
@@ -20,15 +21,19 @@ public class AItem implements RViewItem<UserInfo1> {
 
     @Override
     public boolean isItemView(UserInfo1 entity, int position) {
-        return entity.getType()==1;
+        return entity.getType() == 1;
     }
 
     @Override
-    public void convert(RViewHolder holder, UserInfo1 entity, int position,Context context) {
+    public void convert(RViewHolder holder, UserInfo1 entity, int position) {
         TextView account = holder.getView(R.id.single_account);
         account.setText(entity.getAccount());
         TextView password = holder.getView(R.id.single_password);
         password.setText(entity.getPassword());
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT);
+        params.topMargin = 200;
+        account.setLayoutParams(params);
     }
 
 }

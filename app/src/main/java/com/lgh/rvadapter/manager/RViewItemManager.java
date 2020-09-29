@@ -1,11 +1,9 @@
 package com.lgh.rvadapter.manager;
 
-import android.content.Context;
+import androidx.collection.SparseArrayCompat;
 
 import com.lgh.rvadapter.holder.RViewHolder;
 import com.lgh.rvadapter.model.RViewItem;
-
-import androidx.collection.SparseArrayCompat;
 
 /**
  * author:lgh on 2019-11-14 16:15
@@ -41,15 +39,15 @@ public class RViewItemManager<T> {
         throw new RuntimeException(RViewItemManager.class.getSimpleName() + "异常类型");
     }
 
-    public RViewItem getRViewItem(int viewType) {
+    public RViewItem<T> getRViewItem(int viewType) {
         return styles.get(viewType);
     }
 
-    public void convert(RViewHolder holder, T entity, int position, Context context) {
+    public void convert(RViewHolder holder, T entity, int position) {
         for (int i = 0; i < styles.size(); i++) {
             RViewItem<T> item = styles.valueAt(i);
             if (item.isItemView(entity, position)) {
-                item.convert(holder, entity, position,context);
+                item.convert(holder, entity, position);
                 return;
             }
         }

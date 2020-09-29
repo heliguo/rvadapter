@@ -61,7 +61,7 @@ public class RViewAdapter<T> extends RecyclerView.Adapter<RViewHolder> {
     @Override
     public RViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         mContext = parent.getContext();
-        RViewItem rViewItem = itemStyle.getRViewItem(viewType);
+        RViewItem<T> rViewItem = itemStyle.getRViewItem(viewType);
         RViewHolder holder = RViewHolder.createViewHolder(parent.getContext(), parent, rViewItem.getItemLayout());
         if (rViewItem.openClick()) setListener(holder);
         return holder;
@@ -143,5 +143,6 @@ public class RViewAdapter<T> extends RecyclerView.Adapter<RViewHolder> {
         this.mDatas.addAll(datas);
         notifyItemRangeChanged(size, datas.size());
     }
+
 
 }

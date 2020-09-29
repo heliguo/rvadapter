@@ -1,6 +1,8 @@
 package com.lgh.multi_rv_library.impl;
 
 import android.content.Context;
+import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.lgh.multi_rv_library.R;
@@ -30,5 +32,9 @@ public class BItem implements RViewItem<UserInfo1> {
         account.setText(entity.getAccount());
         TextView password = holder.getView(R.id.single_password1);
         password.setText(entity.getPassword());
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT);
+        params.topMargin = 200;
+        account.setLayoutParams(params);
     }
 }

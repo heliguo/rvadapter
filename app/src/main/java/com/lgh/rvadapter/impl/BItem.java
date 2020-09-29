@@ -1,6 +1,5 @@
 package com.lgh.rvadapter.impl;
 
-import android.content.Context;
 import android.widget.TextView;
 
 import com.lgh.rvadapter.R;
@@ -24,7 +23,7 @@ public class BItem implements RViewItem<UserInfo1> {
     }
 
     @Override
-    public void convert(RViewHolder holder, UserInfo1 entity, int position, Context context) {
+    public void convert(RViewHolder holder, UserInfo1 entity, int position) {
         TextView account = holder.getView(R.id.single_account1);
         account.setText(entity.getAccount());
         TextView password = holder.getView(R.id.single_password1);

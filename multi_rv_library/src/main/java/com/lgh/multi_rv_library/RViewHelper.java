@@ -45,7 +45,8 @@ public class RViewHelper<T> {
     }
 
     private void init() {
-        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
+        recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         if (swipeRefreshHelper != null) {
             swipeRefreshHelper.setSwipeRefreshListener(() -> {

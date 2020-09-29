@@ -41,7 +41,7 @@ public class RViewItemManager<T> {
         throw new RuntimeException(RViewItemManager.class.getSimpleName() + "异常类型");
     }
 
-    public RViewItem getRViewItem(int viewType) {
+    public RViewItem<T> getRViewItem(int viewType) {
         return styles.get(viewType);
     }
 

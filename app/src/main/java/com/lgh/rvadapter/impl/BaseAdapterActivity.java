@@ -2,6 +2,8 @@ package com.lgh.rvadapter.impl;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 
 import com.lgh.rvadapter.R;
 import com.lgh.rvadapter.RViewHelper;
@@ -11,6 +13,7 @@ import com.lgh.rvadapter.core.RViewCreate;
 import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
@@ -44,7 +47,9 @@ public abstract class BaseAdapterActivity extends AppCompatActivity implements
 
     @Override
     public RecyclerView createRecyclerView() {
-        return findViewById(R.id.recyclerview);
+        RecyclerView rv = findViewById(R.id.recyclerview);
+        rv.setLayoutManager(new LinearLayoutManager(this));
+        return rv;
     }
 
     @Override
@@ -54,5 +59,10 @@ public abstract class BaseAdapterActivity extends AppCompatActivity implements
 
     public void notifyAdapterDataSetChanged(List datas) {
         helper.notifyAdapterDataSetChanged(datas);
+    }
+
+    public void refresh(View view) {
+        Log.e("TAG", "refresh: " );
+        helper.setOrientation(RecyclerView.HORIZONTAL);
     }
 }

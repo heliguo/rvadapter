@@ -1,17 +1,21 @@
 package com.lgh.rvadapter;
 
 import android.content.Context;
+import android.os.Build;
 import android.util.Log;
+
+import androidx.annotation.RequiresApi;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.lgh.rvadapter.base.RViewAdapter;
 import com.lgh.rvadapter.core.RViewCreate;
 
 import java.util.List;
-
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 /**
  * author:lgh on 2019-11-14 15:45
@@ -28,6 +32,7 @@ public class RViewHelper<T> {
     private boolean isSupportPaging;
     private SwipeRefreshHelper.SwipeRefreshListener swipeRefreshListener;
     private int currentPageNumber;//当前页
+    private int mOrientation = RecyclerView.VERTICAL;
 
     private RViewHelper(Builder<T> builder) {
         this.swipeRefreshLayout = builder.create.createSwipeRefresh();
@@ -44,14 +49,29 @@ public class RViewHelper<T> {
     }
 
     private void init() {
-        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
+        if (layoutManager != null) {
+            if (layoutManager instanceof LinearLayoutManager){
+                Log.e("==========", "LinearLayoutManager: ");
+            }
+            if (layoutManager instanceof GridLayoutManager){
+                Log.e("==========", "GridLayoutManager: ");
+            }
+            if (layoutManager instanceof StaggeredGridLayoutManager){
+                Log.e("==========", "StaggeredGridLayoutManager: ");
+            }
+        }
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
+        linearLayoutManager.setOrientation(mOrientation);
+        recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         if (swipeRefreshHelper != null) {
             swipeRefreshHelper.setSwipeRefreshListener(() -> {
                 dismissSwipeRefresh();//停止刷新
                 //重置页码
                 currentPageNumber = startPageNumber;
-                if (swipeRefreshListener != null) swipeRefreshListener.OnRefresh();
+                if (swipeRefreshListener != null)
+                    swipeRefreshListener.OnRefresh();
             });
         }
         recyclerView.setAdapter(adapter);
@@ -75,6 +95,27 @@ public class RViewHelper<T> {
             Log.e("RViewHelper", "notifyAdapterDataSetChanged: " + "分页功能");
         }
 
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public void setOrientation(int orientation) {
+        ThreadLocal<String> local = ThreadLocal.withInitial(() -> "supplier");
+        local.get();
+        local.remove();
+        if (mOrientation == orientation)
+            return;
+        this.mOrientation = orientation;
+        LinearLayoutManager manager = new LinearLayoutManager(context);
+        manager.setOrientation(orientation);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(context, 1);
+        gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                return 0;
+            }
+        });
+        recyclerView.setLayoutManager(manager);
+        recyclerView.requestLayout();
     }
 
     public static class Builder<T> {

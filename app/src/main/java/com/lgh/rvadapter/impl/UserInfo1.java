@@ -5,6 +5,7 @@ public class UserInfo1 {
     private String account;
     private String password;
     private int type;
+    private boolean grouping;
 
     public UserInfo1() {
     }
