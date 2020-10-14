@@ -28,7 +28,7 @@ public class RViewHelper<T extends ItemType> {
     private SwipeRefreshLayout swipeRefreshLayout;
     private SwipeRefreshHelper swipeRefreshHelper;
     private RecyclerView recyclerView;
-    private RViewAdapter adapter;
+    private RViewAdapter<T> adapter;
     private int startPageNumber = 1;
     private boolean isSupportPaging;
     private SwipeRefreshHelper.SwipeRefreshListener swipeRefreshListener;
@@ -128,7 +128,7 @@ public class RViewHelper<T extends ItemType> {
             this.listener = listener;
         }
 
-        public RViewHelper build() {
+        public RViewHelper<T> build() {
             return new RViewHelper<>(this);
         }
     }

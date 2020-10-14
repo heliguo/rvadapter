@@ -9,6 +9,7 @@ import android.view.View;
 import com.lgh.rvadapter.R;
 import com.lgh.rvadapter.RViewHelper;
 import com.lgh.rvadapter.SwipeRefreshHelper;
+import com.lgh.rvadapter.base.ItemType;
 import com.lgh.rvadapter.core.RViewCreate;
 
 import java.util.List;
@@ -25,16 +26,16 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
  * author:lgh on 2019-11-14 11:32
  */
 public abstract class BaseAdapterActivity extends AppCompatActivity implements
-        RViewCreate, SwipeRefreshHelper.SwipeRefreshListener {
+        RViewCreate<ItemType>, SwipeRefreshHelper.SwipeRefreshListener {
 
-    protected RViewHelper helper;
+    protected RViewHelper<ItemType> helper;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recyclerview_adpter);
-        helper = new RViewHelper.Builder(this, this).build();
+        helper = new RViewHelper.Builder<>(this, this).build();
     }
 
 
@@ -60,7 +61,7 @@ public abstract class BaseAdapterActivity extends AppCompatActivity implements
         return false;
     }
 
-    public void notifyAdapterDataSetChanged(List datas) {
+    public void notifyAdapterDataSetChanged(List<ItemType> datas) {
         helper.notifyAdapterDataSetChanged(datas);
     }
 

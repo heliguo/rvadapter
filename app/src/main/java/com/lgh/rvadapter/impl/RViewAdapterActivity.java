@@ -62,7 +62,7 @@ public class RViewAdapterActivity extends BaseAdapterActivity {
     }
 
     @Override
-    public RViewAdapter createRViewAdapter() {
+    public RViewAdapter<ItemType> createRViewAdapter() {
         //        //单一布局
         //        RViewItem<UserInfo> item1 = new RViewItem<UserInfo>() {
         //            @Override
@@ -90,14 +90,8 @@ public class RViewAdapterActivity extends BaseAdapterActivity {
         //        };
         //        RViewAdapter adapter = new RViewAdapter<UserInfo>(datas, item1);
         MutiAdapter adapter = new MutiAdapter(datas);
-        adapter.setItemListener(new ItemListener<ItemType>() {
-            @Override
-            public void onItemClick(View view, ItemType entity, int position) {
-                Toast.makeText(RViewAdapterActivity.this, "type: " + entity.getType() +
-                        " position: " + (position + 1), Toast.LENGTH_SHORT).show();
-            }
-
-        });
+        adapter.setItemListener((view, entity, position) -> Toast.makeText(RViewAdapterActivity.this, "type: " + entity.getType() +
+                " position: " + (position + 1), Toast.LENGTH_SHORT).show());
         return adapter;
     }
 }

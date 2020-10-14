@@ -25,13 +25,12 @@ import java.util.List;
 
 /**
  * @author lgh on 2020/10/14:14:58
- * @description
+ * @description 将recyclerview作为item
  */
 public class RvItem implements RViewItem<ItemType> {
 
     private Context mContext;
     private RecyclerView mRecyclerView;
-    private RViewHelper<RvInfo.Bean> mBeanRViewHelper;
     private List<RvInfo.Bean> mInfos = new ArrayList<>();
 
     @Override
@@ -56,10 +55,10 @@ public class RvItem implements RViewItem<ItemType> {
         LinearLayoutManager manager = new LinearLayoutManager(mContext);
         manager.setOrientation(RecyclerView.HORIZONTAL);
         mRecyclerView.setLayoutManager(manager);
-        mBeanRViewHelper = new RViewHelper.Builder<>(rvItem, null).build();
+        RViewHelper<RvInfo.Bean> beanRViewHelper = new RViewHelper.Builder<>(rvItem, null).build();
         if (entity instanceof RvInfo) {
             mInfos = ((RvInfo) entity).getInfos();
-            mBeanRViewHelper.notifyAdapterDataSetChanged(mInfos);
+            beanRViewHelper.notifyAdapterDataSetChanged(mInfos);
         }
     }
 
