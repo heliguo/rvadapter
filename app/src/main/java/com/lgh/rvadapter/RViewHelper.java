@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.lgh.rvadapter.base.ItemType;
 import com.lgh.rvadapter.base.RViewAdapter;
 import com.lgh.rvadapter.core.RViewCreate;
 
@@ -60,10 +61,10 @@ public class RViewHelper<T extends ItemType> {
             if (layoutManager instanceof StaggeredGridLayoutManager) {
                 Log.e("==========", "StaggeredGridLayoutManager: ");
             }
+        }else {
+            layoutManager = new LinearLayoutManager(context);
         }
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
-        linearLayoutManager.setOrientation(mOrientation);
-        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         if (swipeRefreshHelper != null) {
             swipeRefreshHelper.setSwipeRefreshListener(() -> {

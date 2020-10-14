@@ -1,10 +1,8 @@
 package com.lgh.rvadapter.base;
 
-import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.lgh.rvadapter.ItemType;
 import com.lgh.rvadapter.holder.RViewHolder;
 import com.lgh.rvadapter.listener.ItemListener;
 import com.lgh.rvadapter.manager.RViewItemManager;

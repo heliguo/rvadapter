@@ -1,4 +1,4 @@
-package com.lgh.rvadapter;
+package com.lgh.rvadapter.base;
 
 /**
  * @author lgh on 2020/9/18:18:41

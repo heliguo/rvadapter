@@ -7,7 +7,6 @@ import androidx.annotation.NonNull;
 import androidx.paging.PagedListAdapter;
 import androidx.recyclerview.widget.DiffUtil;
 
-import com.lgh.rvadapter.ItemType;
 import com.lgh.rvadapter.holder.RViewHolder;
 import com.lgh.rvadapter.listener.ItemListener;
 import com.lgh.rvadapter.manager.RViewItemManager;

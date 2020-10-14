@@ -3,7 +3,7 @@ package com.lgh.rvadapter.core;
 
 import android.content.Context;
 
-import com.lgh.rvadapter.ItemType;
+import com.lgh.rvadapter.base.ItemType;
 import com.lgh.rvadapter.base.RViewAdapter;
 
 import androidx.recyclerview.widget.RecyclerView;

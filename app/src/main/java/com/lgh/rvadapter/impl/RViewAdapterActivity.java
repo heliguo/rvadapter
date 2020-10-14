@@ -1,11 +1,14 @@
 package com.lgh.rvadapter.impl;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
-import com.lgh.rvadapter.ItemType;
+import com.lgh.rvadapter.base.ItemType;
 import com.lgh.rvadapter.base.RViewAdapter;
+import com.lgh.rvadapter.impl.bean.RvInfo;
+import com.lgh.rvadapter.impl.bean.UserInfo;
+import com.lgh.rvadapter.impl.bean.UserInfo1;
 import com.lgh.rvadapter.listener.ItemListener;
 
 import java.util.ArrayList;
@@ -23,6 +26,14 @@ public class RViewAdapterActivity extends BaseAdapterActivity {
 
     protected void initDatas() {
         if (datas.isEmpty()) {
+            List<RvInfo.Bean> beans = new ArrayList<>();
+            beans.add(new RvInfo.Bean("content1"));
+            beans.add(new RvInfo.Bean("content2"));
+            beans.add(new RvInfo.Bean("content3"));
+            beans.add(new RvInfo.Bean("content4"));
+            beans.add(new RvInfo.Bean("content5"));
+            beans.add(new RvInfo.Bean("content6"));
+            datas.add(new RvInfo(3, true, beans));
             for (int i = 0; i < 100; i++) {
 
                 if (i < 50) {
@@ -82,13 +93,10 @@ public class RViewAdapterActivity extends BaseAdapterActivity {
         adapter.setItemListener(new ItemListener<ItemType>() {
             @Override
             public void onItemClick(View view, ItemType entity, int position) {
-                Log.e("123455666777", "onItemClick: " + position);
+                Toast.makeText(RViewAdapterActivity.this, "type: " + entity.getType() +
+                        " position: " + (position + 1), Toast.LENGTH_SHORT).show();
             }
 
-            @Override
-            public boolean onItemLongClick(View view, ItemType entity, int position) {
-                return false;
-            }
         });
         return adapter;
     }

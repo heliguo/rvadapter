@@ -1,6 +1,6 @@
-package com.lgh.rvadapter.impl;
+package com.lgh.rvadapter.impl.bean;
 
-import com.lgh.rvadapter.ItemType;
+import com.lgh.rvadapter.base.ItemType;
 
 public class UserInfo implements ItemType {
 

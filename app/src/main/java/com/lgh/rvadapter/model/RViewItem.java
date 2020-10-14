@@ -1,7 +1,7 @@
 package com.lgh.rvadapter.model;
 
 
-import com.lgh.rvadapter.ItemType;
+import com.lgh.rvadapter.base.ItemType;
 import com.lgh.rvadapter.holder.RViewHolder;
 
 /**

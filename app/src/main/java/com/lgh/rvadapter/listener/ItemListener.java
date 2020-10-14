@@ -9,5 +9,7 @@ public interface ItemListener<T> {
 
     void onItemClick(View view, T entity, int position);
 
-    boolean onItemLongClick(View view, T entity, int position);
+   default boolean onItemLongClick(View view, T entity, int position){
+       return false;
+   }
 }

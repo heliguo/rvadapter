@@ -1,12 +1,13 @@
-package com.lgh.rvadapter.impl;
+package com.lgh.rvadapter.impl.item;
 
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.lgh.rvadapter.ItemType;
+import com.lgh.rvadapter.base.ItemType;
 import com.lgh.rvadapter.R;
 import com.lgh.rvadapter.holder.RViewHolder;
+import com.lgh.rvadapter.impl.bean.UserInfo1;
 import com.lgh.rvadapter.model.RViewItem;
 
 public class AItem implements RViewItem<ItemType> {
