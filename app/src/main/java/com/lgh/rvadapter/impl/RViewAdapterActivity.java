@@ -1,7 +1,6 @@
 package com.lgh.rvadapter.impl;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Toast;
 
 import com.lgh.rvadapter.base.ItemType;
@@ -9,7 +8,6 @@ import com.lgh.rvadapter.base.RViewAdapter;
 import com.lgh.rvadapter.impl.bean.RvInfo;
 import com.lgh.rvadapter.impl.bean.UserInfo;
 import com.lgh.rvadapter.impl.bean.UserInfo1;
-import com.lgh.rvadapter.listener.ItemListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,9 +32,13 @@ public class RViewAdapterActivity extends BaseAdapterActivity {
             beans.add(new RvInfo.Bean("content5"));
             beans.add(new RvInfo.Bean("content6"));
             datas.add(new RvInfo(3, true, beans));
+
             for (int i = 0; i < 100; i++) {
 
                 if (i < 50) {
+                    if (i == 10) {
+                        datas.add(new RvInfo(3, true, beans));
+                    }
                     UserInfo1 userInfo = new UserInfo1();
                     userInfo.setType(1);
                     userInfo.setAccount("UserInfo1_" + i);
@@ -51,6 +53,7 @@ public class RViewAdapterActivity extends BaseAdapterActivity {
                 }
 
             }
+            datas.add(new RvInfo(3, true, beans));
         }
     }
 

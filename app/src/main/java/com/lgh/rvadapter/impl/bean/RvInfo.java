@@ -59,7 +59,7 @@ public class RvInfo implements ItemType {
 
         @Override
         public int getType() {
-            return 0;
+            return 4;
         }
 
         @Override

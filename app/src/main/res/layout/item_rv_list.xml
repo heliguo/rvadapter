@@ -3,23 +3,23 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
-    android:padding="5dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="5dp">
 
     <ImageView
-        android:src="@drawable/ic_launcher_background"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-    <TextView
-        android:layout_gravity="center"
-        android:id="@+id/item_rv_txt"
-        android:gravity="center"
+        android:id="@+id/item_rv_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:text="1111"/>
+        android:src="@drawable/ic_launcher_background" />
 
+    <TextView
+        android:id="@+id/item_rv_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:text="1111" />
 
 
 </LinearLayout>

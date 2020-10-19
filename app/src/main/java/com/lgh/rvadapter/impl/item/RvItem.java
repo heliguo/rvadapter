@@ -20,7 +20,6 @@ import com.lgh.rvadapter.impl.bean.RvInfo;
 import com.lgh.rvadapter.listener.ItemListener;
 import com.lgh.rvadapter.model.RViewItem;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,9 +28,11 @@ import java.util.List;
  */
 public class RvItem implements RViewItem<ItemType> {
 
-    private Context mContext;
-    private RecyclerView mRecyclerView;
-    private List<RvInfo.Bean> mInfos = new ArrayList<>();
+    private RecyclerView.RecycledViewPool mViewPool;
+
+    public RvItem() {
+        mViewPool = new RecyclerView.RecycledViewPool();
+    }
 
     @Override
     public int getItemLayout() {
@@ -50,48 +51,53 @@ public class RvItem implements RViewItem<ItemType> {
 
     @Override
     public void convert(RViewHolder holder, ItemType entity, int position) {
-        mContext = holder.getConvertView().getContext();
-        mRecyclerView = holder.getView(R.id.item_rv);
-        LinearLayoutManager manager = new LinearLayoutManager(mContext);
-        manager.setOrientation(RecyclerView.HORIZONTAL);
-        mRecyclerView.setLayoutManager(manager);
-        RViewHelper<RvInfo.Bean> beanRViewHelper = new RViewHelper.Builder<>(rvItem, null).build();
-        if (entity instanceof RvInfo) {
-            mInfos = ((RvInfo) entity).getInfos();
-            beanRViewHelper.notifyAdapterDataSetChanged(mInfos);
-        }
+        creatHolder(holder, entity, position);
     }
 
-    public RViewCreate<RvInfo.Bean> rvItem = new RViewCreate<RvInfo.Bean>() {
+    private void creatHolder(RViewHolder holder, ItemType entity, int position) {
+        Context context = holder.getConvertView().getContext();
+        List<RvInfo.Bean> datas = ((RvInfo) entity).getInfos();
+        RViewCreate<RvInfo.Bean> rvItem = new RViewCreate<RvInfo.Bean>() {
+            @Override
+            public Context context() {
+                return context;
+            }
 
-        @Override
-        public Context context() {
-            return mContext;
-        }
+            @Override
+            public SwipeRefreshLayout createSwipeRefresh() {
+                return null;
+            }
 
-        @Override
-        public SwipeRefreshLayout createSwipeRefresh() {
-            return null;
-        }
+            @Override
+            public RecyclerView createRecyclerView() {
+                RecyclerView recyclerView = holder.getView(R.id.item_rv);
+                LinearLayoutManager manager = new LinearLayoutManager(context);
+                manager.setOrientation(RecyclerView.HORIZONTAL);
+                //                manager.setRecycleChildrenOnDetach(true);//设置回收
+                if (position == 0)
+                    manager.setReverseLayout(true);//反转绘制
+                recyclerView.setLayoutManager(manager);
+//                recyclerView.setRecycledViewPool(mViewPool);//设置缓存pool
+                return recyclerView;
+            }
 
-        @Override
-        public RecyclerView createRecyclerView() {
+            @Override
+            public RViewAdapter<RvInfo.Bean> createRViewAdapter() {
+                RViewAdapter<RvInfo.Bean> adapter = new RViewAdapter<>(datas, mBeanRViewItem);
+                adapter.setItemListener(listener);
+                return adapter;
+            }
 
-            return mRecyclerView;
-        }
+            @Override
+            public boolean isSupportPaging() {
+                return false;
+            }
+        };
+        RViewHelper<RvInfo.Bean> beanRViewHelper = new RViewHelper.Builder<>(rvItem, null).build();
+        beanRViewHelper.notifyAdapterDataSetChanged(((RvInfo) entity).getInfos());
 
-        @Override
-        public RViewAdapter<RvInfo.Bean> createRViewAdapter() {
-            RViewAdapter<RvInfo.Bean> adapter = new RViewAdapter<>(mInfos, mBeanRViewItem);
-            adapter.setItemListener(listener);
-            return adapter;
-        }
+    }
 
-        @Override
-        public boolean isSupportPaging() {
-            return false;
-        }
-    };
 
     RViewItem<RvInfo.Bean> mBeanRViewItem = new RViewItem<RvInfo.Bean>() {
         @Override
@@ -119,7 +125,19 @@ public class RvItem implements RViewItem<ItemType> {
     ItemListener<RvInfo.Bean> listener = new ItemListener<RvInfo.Bean>() {
         @Override
         public void onItemClick(View view, RvInfo.Bean entity, int position) {
-            Toast.makeText(mContext, entity.getContent(), Toast.LENGTH_SHORT).show();
+            view.findViewById(R.id.item_rv_image).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(v.getContext(), "you click the image", Toast.LENGTH_SHORT).show();
+                }
+            });
+            view.findViewById(R.id.item_rv_txt).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(v.getContext(), "you click the content text", Toast.LENGTH_SHORT).show();
+                }
+            });
+
         }
 
     };
