@@ -8,12 +8,12 @@ import com.lgh.rvadapter.impl.item.RvItem;
 
 import java.util.List;
 
-public class MutiAdapter extends RViewAdapter<ItemType> {
+public class MutilAdapter extends RViewAdapter<ItemType> {
 
-    public MutiAdapter(List<ItemType> datas) {
+    public MutilAdapter(List<ItemType> datas) {
         super(datas);
-        addItemStyle(new AItem());
-        addItemStyle(new BItem());
+        addItemStyle(new AItem()).
+        addItemStyle(new BItem()).
         addItemStyle(new RvItem());
     }
 }

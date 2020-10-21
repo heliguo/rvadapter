@@ -40,8 +40,9 @@ public class RViewAdapter<T extends ItemType> extends RecyclerView.Adapter<RView
         addItemStyle(item);
     }
 
-    public void addItemStyle(RViewItem<T> item) {
+    public RViewAdapter addItemStyle(RViewItem<T> item) {
         itemStyle.addStyle(item);
+        return this;
     }
 
     //是否有多样式布局

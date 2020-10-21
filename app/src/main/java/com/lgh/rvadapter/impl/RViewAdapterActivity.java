@@ -92,7 +92,7 @@ public class RViewAdapterActivity extends BaseAdapterActivity {
         //            }
         //        };
         //        RViewAdapter adapter = new RViewAdapter<UserInfo>(datas, item1);
-        MutiAdapter adapter = new MutiAdapter(datas);
+        MutilAdapter adapter = new MutilAdapter(datas);
         adapter.setItemListener((view, entity, position) -> Toast.makeText(RViewAdapterActivity.this, "type: " + entity.getType() +
                 " position: " + (position + 1), Toast.LENGTH_SHORT).show());
         return adapter;

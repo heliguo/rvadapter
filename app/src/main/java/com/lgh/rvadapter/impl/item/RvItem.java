@@ -28,11 +28,9 @@ import java.util.List;
  */
 public class RvItem implements RViewItem<ItemType> {
 
-    private RecyclerView.RecycledViewPool mViewPool;
+    private static final String TAG = "RvItem";
 
-    public RvItem() {
-        mViewPool = new RecyclerView.RecycledViewPool();
-    }
+    //    private RecyclerView.RecycledViewPool mViewPool;
 
     @Override
     public int getItemLayout() {
@@ -55,8 +53,10 @@ public class RvItem implements RViewItem<ItemType> {
     }
 
     private void creatHolder(RViewHolder holder, ItemType entity, int position) {
+        holder.setIsRecyclable(false);
         Context context = holder.getConvertView().getContext();
         List<RvInfo.Bean> datas = ((RvInfo) entity).getInfos();
+
         RViewCreate<RvInfo.Bean> rvItem = new RViewCreate<RvInfo.Bean>() {
             @Override
             public Context context() {
@@ -77,7 +77,7 @@ public class RvItem implements RViewItem<ItemType> {
                 if (position == 0)
                     manager.setReverseLayout(true);//反转绘制
                 recyclerView.setLayoutManager(manager);
-//                recyclerView.setRecycledViewPool(mViewPool);//设置缓存pool
+                //                recyclerView.setRecycledViewPool(mViewPool);//设置缓存pool
                 return recyclerView;
             }
 
@@ -93,6 +93,7 @@ public class RvItem implements RViewItem<ItemType> {
                 return false;
             }
         };
+
         RViewHelper<RvInfo.Bean> beanRViewHelper = new RViewHelper.Builder<>(rvItem, null).build();
         beanRViewHelper.notifyAdapterDataSetChanged(((RvInfo) entity).getInfos());
 
@@ -122,23 +123,19 @@ public class RvItem implements RViewItem<ItemType> {
         }
     };
 
-    ItemListener<RvInfo.Bean> listener = new ItemListener<RvInfo.Bean>() {
-        @Override
-        public void onItemClick(View view, RvInfo.Bean entity, int position) {
-            view.findViewById(R.id.item_rv_image).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(v.getContext(), "you click the image", Toast.LENGTH_SHORT).show();
-                }
-            });
-            view.findViewById(R.id.item_rv_txt).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(v.getContext(), "you click the content text", Toast.LENGTH_SHORT).show();
-                }
-            });
-
-        }
+    ItemListener<RvInfo.Bean> listener = (view, entity, position) -> {
+        view.findViewById(R.id.item_rv_image).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(v.getContext(), "you click the image", Toast.LENGTH_SHORT).show();
+            }
+        });
+        view.findViewById(R.id.item_rv_txt).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(v.getContext(), "you click the content text", Toast.LENGTH_SHORT).show();
+            }
+        });
 
     };
 }
