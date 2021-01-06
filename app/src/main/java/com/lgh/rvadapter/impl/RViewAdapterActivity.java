@@ -33,10 +33,10 @@ public class RViewAdapterActivity extends BaseAdapterActivity {
             beans.add(new RvInfo.Bean("content6"));
             datas.add(new RvInfo(3, true, beans));
 
-            for (int i = 0; i < 100; i++) {
+            for (int i = 0; i < 50; i++) {
 
-                if (i < 50) {
-                    if (i == 10) {
+                if (i < 25) {
+                    if (i == 2) {
                         datas.add(new RvInfo(3, true, beans));
                     }
                     UserInfo1 userInfo = new UserInfo1();
@@ -60,7 +60,7 @@ public class RViewAdapterActivity extends BaseAdapterActivity {
     @Override
     public void OnRefresh() {
         initDatas();
-        datas.add(new UserInfo1("hhh", "345", 1));
+        datas.add(new UserInfo1("hhh", "345", 3));
         notifyAdapterDataSetChanged(datas);
     }
 

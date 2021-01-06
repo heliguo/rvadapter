@@ -76,6 +76,7 @@ public class RViewAdapter<T extends ItemType> extends RecyclerView.Adapter<RView
      * @param holder holder
      */
     private void setListener(final RViewHolder holder) {
+        Log.e("===", "setListener: " + holder.getAdapterPosition());
         holder.getConvertView().setOnClickListener(v -> {
             if (itemListener != null) {
                 int position = holder.getAdapterPosition();//当前整个条目类型可点击
@@ -140,17 +141,15 @@ public class RViewAdapter<T extends ItemType> extends RecyclerView.Adapter<RView
         notifyDataSetChanged();
     }
 
-    /**
-     * 局部刷新
-     *
-     * @param datas datas
-     */
-    public void addDatasRange(List<T> datas) {
-        int size = this.mDatas.size();
-        if (datas == null)
-            return;
-        this.mDatas.addAll(datas);
-        notifyItemRangeChanged(size, datas.size());
+
+
+    private int currentItemType = -1;
+
+    public boolean isFirstViewOfType(int position) {
+        boolean isFirstView ;
+        isFirstView = currentItemType != getItemViewType(position);
+        currentItemType = getItemViewType(position);
+        return isFirstView;
     }
 
 }

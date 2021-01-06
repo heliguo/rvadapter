@@ -13,7 +13,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
  * 创建ViewHelper所需的数据
  * 其实现类为ViewHelper提供数据
  */
-public interface RViewCreate<T> {
+public interface RViewCreate {
 
     /**
      * 上下文
@@ -30,10 +30,7 @@ public interface RViewCreate<T> {
      */
     RecyclerView createRecyclerView();
 
-    /**
-     * 创建adapter
-     */
-    RViewAdapter<T> createRViewAdapter();
+    RViewAdapter createRViewAdapter();
 
     /**
      * 是否分页

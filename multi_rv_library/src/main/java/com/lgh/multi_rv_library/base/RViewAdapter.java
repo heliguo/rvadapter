@@ -1,8 +1,12 @@
 package com.lgh.multi_rv_library.base;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.lgh.multi_rv_library.holder.RViewHolder;
 import com.lgh.multi_rv_library.listener.ItemListener;
@@ -12,13 +16,10 @@ import com.lgh.multi_rv_library.model.RViewItem;
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-
 /**
  * author:lgh on 2019-11-14 16:16
  */
-public class RViewAdapter<T> extends RecyclerView.Adapter<RViewHolder> {
+public class RViewAdapter<T, V extends RViewItem<T>> extends RecyclerView.Adapter<RViewHolder> {
 
     private RViewItemManager<T> itemStyle;//条目类型管理
     private ItemListener<T> itemListener;//item点击事件监听
@@ -28,20 +29,22 @@ public class RViewAdapter<T> extends RecyclerView.Adapter<RViewHolder> {
 
     //单一布局
     public RViewAdapter(List<T> datas) {
-        if (datas == null) this.mDatas = new ArrayList<>();
+        if (datas == null)
+            this.mDatas = new ArrayList<>();
         this.mDatas = datas;
         itemStyle = new RViewItemManager<>();
     }
 
     //嵌套（多样式布局）
-    public RViewAdapter(List<T> datas, RViewItem<T> item) {
-        if (datas == null) this.mDatas = new ArrayList<>();
+    public RViewAdapter(List<T> datas, V item) {
+        if (datas == null)
+            this.mDatas = new ArrayList<>();
         this.mDatas = datas;
         itemStyle = new RViewItemManager<>();
         addItemStyle(item);
     }
 
-    public void addItemStyle(RViewItem<T> item) {
+    public void addItemStyle(V item) {
         itemStyle.addStyle(item);
     }
 
@@ -53,7 +56,8 @@ public class RViewAdapter<T> extends RecyclerView.Adapter<RViewHolder> {
     @Override
     public int getItemViewType(int position) {
         //多样式布局
-        if (hasMutiStyle()) return itemStyle.getItemViewType(mDatas.get(position), position);
+        if (hasMutiStyle())
+            return itemStyle.getItemViewType(mDatas.get(position), position);
         return super.getItemViewType(position);
     }
 
@@ -63,7 +67,8 @@ public class RViewAdapter<T> extends RecyclerView.Adapter<RViewHolder> {
         mContext = parent.getContext();
         RViewItem<T> rViewItem = itemStyle.getRViewItem(viewType);
         RViewHolder holder = RViewHolder.createViewHolder(parent.getContext(), parent, rViewItem.getItemLayout());
-        if (rViewItem.openClick()) setListener(holder);
+        if (rViewItem.openClick())
+            setListener(holder);
         return holder;
     }
 
@@ -72,7 +77,7 @@ public class RViewAdapter<T> extends RecyclerView.Adapter<RViewHolder> {
             @Override
             public void onClick(View v) {
                 if (itemListener != null) {
-                    int position = holder.getAdapterPosition();//当前整个条目类型可点击
+                    int position = holder.getLayoutPosition();//当前整个条目类型可点击
                     itemListener.onItemClick(v, mDatas.get(position), position);
                 }
             }
@@ -116,7 +121,8 @@ public class RViewAdapter<T> extends RecyclerView.Adapter<RViewHolder> {
      * @param datas data
      */
     public void updateDatas(List<T> datas) {
-        if (datas == null) return;
+        if (datas == null)
+            return;
         this.mDatas = datas;
         notifyDataSetChanged();
     }
@@ -127,7 +133,8 @@ public class RViewAdapter<T> extends RecyclerView.Adapter<RViewHolder> {
      * @param datas data
      */
     public void addDatas(List<T> datas) {
-        if (datas == null) return;
+        if (datas == null)
+            return;
         mDatas.addAll(datas);
         notifyDataSetChanged();
     }
@@ -139,10 +146,14 @@ public class RViewAdapter<T> extends RecyclerView.Adapter<RViewHolder> {
      */
     public void addDatasRange(List<T> datas) {
         int size = this.mDatas.size();
-        if (datas == null) return;
+        if (datas == null)
+            return;
         this.mDatas.addAll(datas);
         notifyItemRangeChanged(size, datas.size());
     }
 
-
+    @Override
+    public void onViewAttachedToWindow(@NonNull RViewHolder holder) {
+        super.onViewAttachedToWindow(holder);
+    }
 }
