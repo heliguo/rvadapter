@@ -34,7 +34,6 @@ public class GroupItemDecoration extends RecyclerView.ItemDecoration {
     protected float mTextBaseLine;
     protected int mPaddingLeft, mPaddingRight;
     protected boolean isCenter;
-    protected boolean isHasHeader;
     protected int mChildItemOffset;
     @SuppressLint("UseSparseArrays")
     private Map<Integer, String> mGroup = new HashMap<>();
@@ -80,8 +79,9 @@ public class GroupItemDecoration extends RecyclerView.ItemDecoration {
     @Override
     public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
 
-        if (mBitmap == null)
+        if (mBitmap == null){
             mBitmap = BitmapFactory.decodeResource(parent.getResources(), R.drawable.date, mOptions);
+        }
         super.onDraw(c, parent, state);
         onDrawGroup(c, parent);
     }
@@ -293,9 +293,6 @@ public class GroupItemDecoration extends RecyclerView.ItemDecoration {
         this.isCenter = isCenter;
     }
 
-    public void setHasHeader(boolean hasHeader) {
-        isHasHeader = hasHeader;
-    }
 
     /**
      * 获取文本的x坐标起点
